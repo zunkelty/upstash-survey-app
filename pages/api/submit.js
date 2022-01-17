@@ -20,8 +20,8 @@ const submitHandler = async (req, res) => {
   // Insert data into Upstash redis
 
   auth({
-    token: "INSERT_YOUR_TOKEN",
-    url: "INSERT_YOUR_URL",
+    token: process.env.REDIS_TOKEN,
+    url: process.env.REDIS_URL,
   });
 
   try {

@@ -4,8 +4,8 @@ const resultsHandler = async (req, res) => {
   // Retrieve data from redis
 
   auth({
-    token: "INSERT_YOUR_TOKEN",
-    url: "INSERT_YOUR_URL",
+    token: process.env.REDIS_TOKEN,
+    url: process.env.REDIS_URL,
   });
 
   try {
@@ -15,9 +15,9 @@ const resultsHandler = async (req, res) => {
     //Get all survey entries by id/key
 
     //To run multiple queries at once, Upstash supports the use of the pipeline command. This way we can run multiple queries at once and get the results in a single call.
-    const response = await fetch(`INSERT_YOUR_URL/pipeline`, {
+    const response = await fetch(`${process.env.REDIS_URL}/pipeline`, {
       headers: {
-        Authorization: `Bearer INSERT_YOUR_TOKEN`,
+        Authorization: `Bearer ${process.env.REDIS_TOKEN}`,
       },
       body: JSON.stringify(data.map((id) => ["HGETALL", id])),
       method: "POST",
